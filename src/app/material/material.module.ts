@@ -6,6 +6,10 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [],
@@ -18,8 +22,11 @@ import {MatButtonModule} from "@angular/material/button";
     MatMenuModule,
     MatSidenavModule,
     MatDividerModule,
-    MatButtonModule
-
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }
