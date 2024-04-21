@@ -8,6 +8,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {switchMap} from "rxjs";
+import {ConfirmService} from "../confirm/confirm.service";
 
 @Component({
   selector: 'app-patient',
@@ -33,7 +34,8 @@ export class PatientComponent implements OnInit{
 
   constructor(
     private patientService: PatientService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private confirmService:ConfirmService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,8 @@ export class PatientComponent implements OnInit{
 
     this.patientService.getMessageChange().subscribe(data => {
       this._snackBar.open(data, 'INFO', {duration: 2000, verticalPosition: 'top', horizontalPosition: 'right'});
-    })
+    });
+    this.confirmService.getConfirm().subscribe(data => this.delete(data));
   }
 
   delete(idPatient: number){
@@ -73,5 +76,7 @@ export class PatientComponent implements OnInit{
     this.dataSource.filter = e.target.value.trim();
     //this.dataSource.filterPredicate = () => { };
   }
-
+  confirm(id:number){
+    this.confirmService.openDialog('0ms', '0ms', id);
+  }
 }
