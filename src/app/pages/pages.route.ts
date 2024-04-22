@@ -5,6 +5,7 @@ import {PatientEditComponent} from "./patient/patient-edit/patient-edit.componen
 import {ExamComponent} from "./exam/exam.component";
 import {SpecialtyComponent} from "./specialty/specialty.component";
 import {SpecialtyEditComponent} from "./specialty/Specialty-edit/specialty-edit.component";
+import {ExamEditComponent} from "./exam/edit/exam-edit.component";
 
 export const routes: Routes = [
   {
@@ -15,7 +16,13 @@ export const routes: Routes = [
     ]
   },
   {path: "medic", component: MedicComponent},
-  {path: "exam", component: ExamComponent},
+  {
+    path: "exam", component: ExamComponent,
+    children: [
+      {path:'new', component:ExamEditComponent},
+      {path:'edit/:id', component:ExamEditComponent},
+    ]
+  },
   {
     path: "specialty", component: SpecialtyComponent,
     children: [
