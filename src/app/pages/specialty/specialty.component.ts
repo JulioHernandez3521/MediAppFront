@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -38,7 +38,8 @@ export class SpecialtyComponent implements OnInit{
   constructor(
     private service: SpecialtyService,
     private _snackBar: MatSnackBar,
-    private confirmService:ConfirmService
+    private confirmService:ConfirmService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -80,5 +81,8 @@ export class SpecialtyComponent implements OnInit{
   }
   confirm(id:number){
     this.confirmService.openDialog('0ms', '0ms', id);
+  }
+  checkChildren(): boolean{
+    return this.route.children.length > 0;
   }
 }

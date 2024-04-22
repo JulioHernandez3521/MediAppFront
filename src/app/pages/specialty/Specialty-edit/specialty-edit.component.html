@@ -8,10 +8,22 @@
   </div>
   <mat-form-field>
     <input matInput placeholder="Name" required formControlName="nameSpecialty">
+    @if(form.controls['nameSpecialty'].errors?.['required'] && form.controls['nameSpecialty'].touched){
+      <small class="invalid"> Is required</small>
+    }
+    @if (form.controls['nameSpecialty'].errors?.['minlength'] && form.controls['nameSpecialty'].touched) {
+    <small class="invalid">Minlength is 3</small>
+    }
   </mat-form-field>
 
   <mat-form-field>
     <input matInput placeholder="Description" required formControlName="descriptionSpecialty">
+    @if(form.controls['descriptionSpecialty'].errors?.['required'] && form.controls['descriptionSpecialty'].touched){
+    <small class="invalid"> Is required</small>
+    }
+    @if (form.controls['descriptionSpecialty'].errors?.['minlength'] && form.controls['descriptionSpecialty'].touched) {
+    <small class="invalid">Minlength is 3</small>
+    }
   </mat-form-field>
   <button mat-raised-button color="primary" type="submit">
     <mat-icon>done</mat-icon>

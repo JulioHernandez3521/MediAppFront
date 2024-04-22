@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -42,8 +42,8 @@ export class SpecialtyEditComponent implements OnInit{
   ngOnInit(): void {
     this.form = new FormGroup({
       idSpecialty: new FormControl(0),
-      descriptionSpecialty: new FormControl(''),
-      nameSpecialty: new FormControl(''),
+      descriptionSpecialty: new FormControl('',[Validators.required,Validators.minLength(3) ]),
+      nameSpecialty: new FormControl('',[Validators.required,Validators.minLength(3) ]),
     });
 
     this.route.params.subscribe(data => {
@@ -58,8 +58,8 @@ export class SpecialtyEditComponent implements OnInit{
       this.service.findById(this.id).subscribe(data => {
         this.form = new FormGroup({
           idSpecialty: new FormControl(data.idSpecialty),
-          nameSpecialty: new FormControl(data.nameSpecialty),
-          descriptionSpecialty: new FormControl(data.descriptionSpecialty)
+          nameSpecialty: new FormControl(data.nameSpecialty,[Validators.required,Validators.minLength(3) ]),
+          descriptionSpecialty: new FormControl(data.descriptionSpecialty,[Validators.required,Validators.minLength(3) ])
         });
       });
     }
@@ -94,5 +94,9 @@ export class SpecialtyEditComponent implements OnInit{
     }
 
     this.router.navigate(['/pages/specialty']);
+  }
+
+  get f(){
+    return this.form?.controls;
   }
 }
