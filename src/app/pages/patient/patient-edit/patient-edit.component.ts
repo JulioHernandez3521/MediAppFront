@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {PatientService} from "../../../services/patient.service";
@@ -14,7 +14,7 @@ import {NgIf} from "@angular/common";
   templateUrl: './patient-edit.component.html',
   styleUrl: './patient-edit.component.css'
 })
-export class PatientEditComponent {
+export class PatientEditComponent implements OnInit{
 
   form?: FormGroup;
   id?: number;
