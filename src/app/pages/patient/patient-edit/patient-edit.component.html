@@ -9,14 +9,26 @@
 
   <mat-form-field>
     <input matInput placeholder="FirstName" required formControlName="firstName">
+    @if(form.controls['firstName'].errors?.['required'] && form.controls['firstName'].touched){
+      <small class="invalid">Is required</small>
+    }
   </mat-form-field>
 
   <mat-form-field>
     <input matInput placeholder="LastName" required formControlName="lastName">
+    @if(form.controls['lastName'].errors?.['required'] && form.controls['lastName'].touched){
+    <small class="invalid">Is required</small>
+    }
   </mat-form-field>
 
   <mat-form-field>
     <input matInput placeholder="DNI" required formControlName="dni">
+    @if(form.controls['dni'].errors?.['required'] && form.controls['dni'].touched){
+    <small class="invalid">Is required</small>
+    }
+    @if(form.controls['dni'].errors?.['maxlength'] && form.controls['dni'].touched){
+    <small class="invalid">Max length is 7</small>
+    }
   </mat-form-field>
 
   <mat-form-field>
@@ -32,6 +44,9 @@
 
   <mat-form-field>
     <input matInput placeholder="Email" required formControlName="email">
+    @if(form.controls['email'].errors?.['email'] && form.controls['email'].touched){
+    <small class="invalid">Invalid Format, must be an email</small>
+    }
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">

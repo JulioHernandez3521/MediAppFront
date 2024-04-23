@@ -33,12 +33,12 @@ export class PatientEditComponent implements OnInit{
   ngOnInit(): void {
     this.form = new FormGroup({
       id: new FormControl(0),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      dni: new FormControl(''),
+      firstName: new FormControl('',[Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      dni: new FormControl('',[Validators.required, Validators.maxLength(7)]),
       address: new FormControl(''),
       phone: new FormControl('+52 ', [Validators.pattern('\\+\\d+\\s\\d+')]),
-      email: new FormControl(''),
+      email: new FormControl('', [Validators.email]),
     });
 
     this.route.params.subscribe(data => {
@@ -53,12 +53,12 @@ export class PatientEditComponent implements OnInit{
       this.patientService.findById(this.id).subscribe(data => {
         this.form = new FormGroup({
           id: new FormControl(data.id),
-          firstName: new FormControl(data.firstName),
-          lastName: new FormControl(data.lastName),
-          dni: new FormControl(data.dni),
+          firstName: new FormControl(data.firstName, [Validators.required]),
+          lastName: new FormControl(data.lastName, [Validators.required]),
+          dni: new FormControl(data.dni,[Validators.required, Validators.maxLength(7)]),
           address: new FormControl(data.address),
           phone: new FormControl(data.phone,[Validators.pattern('\\+\\d+\\s\\d+')]),
-          email: new FormControl(data.email),
+          email: new FormControl(data.email,[Validators.email]),
         });
       });
     }
