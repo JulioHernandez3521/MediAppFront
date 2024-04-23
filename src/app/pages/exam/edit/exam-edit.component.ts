@@ -9,6 +9,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {switchMap} from "rxjs";
 import {ExamService} from "../../../services/exam.service";
 import {Exam} from "../../../models/exam";
+import {FormDataService} from "../../../services/form-data.service";
 
 @Component({
   selector: 'app-edit',
@@ -35,7 +36,8 @@ export class ExamEditComponent  implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ExamService
+    private service: ExamService,
+    private formService:FormDataService<Exam>
   ){}
 
   //private route = inject(ActivatedRoute);
@@ -68,13 +70,8 @@ export class ExamEditComponent  implements OnInit{
 
   operate(){
     if(!this.form) return;
-    const exam: Exam = new Exam();
-    exam.idExam = this.form.value['idExam'];
-    exam.nameExam = this.form.value['nameExam'];
-    exam.descriptionExam = this.form.value['descriptionExam'];
-
-
-    if(this.isEdit && this.id){
+    const exam: Exam  = this.formService.getDataFromValues(this.form.value);
+    if(this.isEdit && this.id && exam){
       //UPDATE
       //PRACTICA COMUN - NO IDEAL
       this.service.update(this.id, exam).subscribe( ()=> {
@@ -100,4 +97,14 @@ export class ExamEditComponent  implements OnInit{
   get f(){
     return this.form?.controls;
   }
+
+  // getDataFromValues(obj: any): Exam {
+  //   // console.log(obj)
+  //   // if(Object.keys(obj).length=== 0) return null
+  //   const examen:any = new Exam();
+  //   for (let key in obj){
+  //     examen[key] = obj[key];
+  //   }
+  //   return examen;
+  // }
 }

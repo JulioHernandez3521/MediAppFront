@@ -6,6 +6,7 @@ import {Patient} from "../../../models/patient";
 import {switchMap} from "rxjs";
 import {MaterialModule} from "../../../material/material.module";
 import {NgIf} from "@angular/common";
+import {FormDataService} from "../../../services/form-data.service";
 
 @Component({
   selector: 'app-patient-edit',
@@ -23,7 +24,8 @@ export class PatientEditComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private formService:FormDataService<Patient>
   ){}
 
   //private route = inject(ActivatedRoute);
@@ -64,16 +66,16 @@ export class PatientEditComponent implements OnInit{
 
   operate(){
     if(!this.form) return;
-    const patient: Patient = new Patient();
-    patient.id = this.form.value['id'];
+    const patient: Patient = this.formService.getDataFromValues(this.form.value);
+    // patient.id = this.form.value['id'];
     //const x = this.form.controls['id'].value;
     //const y = this.form.get('id').value;
-    patient.firstName = this.form.value['firstName'];
-    patient.lastName = this.form.value['lastName'];
-    patient.dni = this.form.value['dni'];
-    patient.address = this.form.value['address'];
-    patient.phone = this.form.value['phone'];
-    patient.email = this.form.value['email'];
+    // patient.firstName = this.form.value['firstName'];
+    // patient.lastName = this.form.value['lastName'];
+    // patient.dni = this.form.value['dni'];
+    // patient.address = this.form.value['address'];
+    // patient.phone = this.form.value['phone'];
+    // patient.email = this.form.value['email'];
 
 
     if(this.isEdit && this.id){

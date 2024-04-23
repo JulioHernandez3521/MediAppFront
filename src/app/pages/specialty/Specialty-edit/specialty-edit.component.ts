@@ -12,6 +12,7 @@ import {Patient} from "../../../models/patient";
 import {switchMap} from "rxjs";
 import {SpecialtyService} from "../../../services/specialty.service";
 import {Specialty} from "../../../models/specialty";
+import {FormDataService} from "../../../services/form-data.service";
 
 @Component({
   selector: 'app-edit',
@@ -34,7 +35,8 @@ export class SpecialtyEditComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: SpecialtyService
+    private service: SpecialtyService,
+    private formService:FormDataService<Specialty>
   ){}
 
   //private route = inject(ActivatedRoute);
@@ -67,10 +69,10 @@ export class SpecialtyEditComponent implements OnInit{
 
   operate(){
     if(!this.form) return;
-    const specialty: Specialty = new Specialty();
-    specialty.idSpecialty = this.form.value['idSpecialty'];
-    specialty.nameSpecialty = this.form.value['nameSpecialty'];
-    specialty.descriptionSpecialty = this.form.value['descriptionSpecialty'];
+    const specialty: Specialty = this.formService.getDataFromValues(this.form.value);
+    // specialty.idSpecialty = this.form.value['idSpecialty'];
+    // specialty.nameSpecialty = this.form.value['nameSpecialty'];
+    // specialty.descriptionSpecialty = this.form.value['descriptionSpecialty'];
 
 
     if(this.isEdit && this.id){
