@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {PatientService} from "../../../services/patient.service";
 import {Patient} from "../../../models/patient";
@@ -37,7 +37,7 @@ export class PatientEditComponent implements OnInit{
       lastName: new FormControl(''),
       dni: new FormControl(''),
       address: new FormControl(''),
-      phone: new FormControl(''),
+      phone: new FormControl('+52 ', [Validators.pattern('\\+\\d+\\s\\d+')]),
       email: new FormControl(''),
     });
 
@@ -57,7 +57,7 @@ export class PatientEditComponent implements OnInit{
           lastName: new FormControl(data.lastName),
           dni: new FormControl(data.dni),
           address: new FormControl(data.address),
-          phone: new FormControl(data.phone),
+          phone: new FormControl(data.phone,[Validators.pattern('\\+\\d+\\s\\d+')]),
           email: new FormControl(data.email),
         });
       });
