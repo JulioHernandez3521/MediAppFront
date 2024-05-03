@@ -6,6 +6,7 @@ import {ExamComponent} from "./exam/exam.component";
 import {SpecialtyComponent} from "./specialty/specialty.component";
 import {SpecialtyEditComponent} from "./specialty/Specialty-edit/specialty-edit.component";
 import {ExamEditComponent} from "./exam/edit/exam-edit.component";
+import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component";
 
 export const routes: Routes = [
   {
@@ -30,4 +31,7 @@ export const routes: Routes = [
       {path:'edit/:id', component:SpecialtyEditComponent},
     ]
   },
+  {
+    path: 'consult-wizard' , component:ConsultWizardComponent
+  }
 ]
