@@ -11,6 +11,6 @@ export class Consult {
     public specialty?:Specialty,
     public numConsult?:string,
     public consultDate?:string | Date,
-    public details?:ConsultDetail,
+    public details?:ConsultDetail[],
   ) {}
 }

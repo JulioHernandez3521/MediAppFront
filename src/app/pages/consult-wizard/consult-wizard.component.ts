@@ -6,7 +6,7 @@ import {Specialty} from "../../models/specialty";
 import {map, Observable} from "rxjs";
 import {PatientService} from "../../services/patient.service";
 import {SpecialtyService} from "../../services/specialty.service";
-import {AsyncPipe, NgClass, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgIf} from "@angular/common";
 import {ConsultDetail} from "../../models/ConsultDetail";
 import {Exam} from "../../models/exam";
 import {ExamService} from "../../services/exam.service";
@@ -15,11 +15,15 @@ import {Medic} from "../../models/medic";
 import {MedicService} from "../../services/medic.service";
 import {FlexLayoutModule} from "ngx-flexible-layout";
 import {MatStepper} from "@angular/material/stepper";
+import { Consult } from '../../models/consult';
+import { daysToWeeks, format, formatISO } from 'date-fns';
+import { ConsultListExamDTOI } from '../../models/consultListExamDTOI';
+import { ConsultService } from '../../services/consult.service';
 
 @Component({
   selector: 'app-consult-wizard',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule,AsyncPipe,FlexLayoutModule, NgClass],
+  imports: [MaterialModule, ReactiveFormsModule, AsyncPipe, FlexLayoutModule, NgClass, JsonPipe],
   templateUrl: './consult-wizard.component.html',
   styleUrl: './consult-wizard.component.css'
 })
@@ -48,7 +52,8 @@ export class ConsultWizardComponent implements OnInit{
       private specialtyService: SpecialtyService,
       private examService: ExamService,
       private _snackBar : MatSnackBar,
-      private medicService:MedicService
+      private medicService:MedicService,
+      private consultService: ConsultService
   ){}
 
   ngOnInit(): void {
@@ -125,7 +130,36 @@ export class ConsultWizardComponent implements OnInit{
     }
     if(this.stepper) this.stepper.next();
   }
-  f(){
+  get f(){
     return this.firstFormGroup?.controls;
+  }
+  save(){
+    const consult = new Consult();
+    consult.medic = this.medicSelected;
+    consult.patient = this.firstFormGroup?.value['patient'];
+    consult.specialty = this.firstFormGroup?.value['specialty'];
+    consult.details = this.detail;
+    consult.numConsult = `C${this.consultSelected}`;
+    consult.consultDate = format(this.firstFormGroup?.value['consultDate'], "yyyy-MM-dd-'T'HH:mm:ss");
+    const dto : ConsultListExamDTOI = {
+      consult: consult,
+      listExam: this.examsSelected
+    }
+    this.consultService.saveTransactional(dto).subscribe(data => {
+      this._snackBar.open("CREATED!", 'INFO', {duration:2000})
+      setTimeout(()=>{
+        this.cleanControls();
+      }, 2000)
+    },error =>{})
+  }
+
+  cleanControls(){
+    this.firstFormGroup?.reset();
+    this.secondFormGroup.reset();
+    this.stepper?.reset();
+    this.detail = [];
+    this.examsSelected = [];
+    this.consultSelected = 0;
+    this.medicSelected = undefined;
   }
 }

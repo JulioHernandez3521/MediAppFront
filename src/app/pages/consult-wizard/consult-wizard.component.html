@@ -1,5 +1,5 @@
 <mat-horizontal-stepper #stepper>
-    @if(firstFormGroup){
+    <!-- @if(firstFormGroup){ -->
         <mat-step>
             <ng-template matStepLabel>Principal</ng-template>
             <div class="form-container">
@@ -79,7 +79,7 @@
                           <mat-card-title class="medic-title" [ngClass]="{'medic-selected' : medicSelected === medic}">{{medic.primaryName}}</mat-card-title>
                           <mat-card-subtitle>{{medic.cmpMedic}}</mat-card-subtitle>
                         </mat-card-header>
-                        <img mat-card-image [src]="medic.photo" style="cursor: pointer;" width="250px" height="320px;" (click)="selectMedic(medic)">
+                        <img mat-card-image [src]="medic.photo" style="cursor: pointer;" width="50px" height="70px;" (click)="selectMedic(medic)">
                         <mat-card-content>
                           <p>{{medic.primaryName}}</p>
                         </mat-card-content>
@@ -87,13 +87,32 @@
                           <button mat-raised-button color="primary" type="button" (click)="selectMedic(medic)">SELECT</button>
                         </mat-card-actions>
                       </mat-card>
+<!--                       
+                      <mat-card [ngClass]="{'medic-selected' : medicSelected === medic}">
+                        <mat-card-header>
+                            <img mat-card-avatar [src]="medic.photo">
+                            <mat-card-title [ngClass]="{'medic-title' : medicSelected === medic}" class="medic-title">{{medic.primaryName}}</mat-card-title>
+                            <mat-card-subtitle>{{medic.cmpMedic}}</mat-card-subtitle>
+                        </mat-card-header>
+
+                        <img mat-card-image [src]="medic.photo" style="cursor: pointer;" width="300" height="400" (click)="selectMedic(medic)">
+
+                        <mat-card-content>
+                            <p>This is medic {{medic.primaryName}} {{medic.surName}}</p>
+                        </mat-card-content>
+
+                        <mat-card-actions>
+                            <button mat-raised-button color="primary" type="button" (click)="selectMedic(m)">SELECT</button>
+                        </mat-card-actions>
+                    
+                    </mat-card> -->
                     }
                   </div>
                   <button mat-raised-button class="fixedRigth" color='primary' type="button" style="float:right;" matStepperNext>Next</button>
                     </form>
                 </div>
             </mat-step>
-    }
+    <!-- } -->
 <!--    @if(secondFormGroup){-->
         <mat-step>
             <ng-template matStepLabel>N° Consult</ng-template>
@@ -109,13 +128,16 @@
         </mat-step>
 <!--    }-->
     <mat-step>
-        <ng-template matStepLabel>Review</ng-template>
-        <h3>Specialty: {{f['specialty']?.value?.nameSpecialty}}</h3>
-        <h3>Specialty: {{f['patient']?.value?.firstName + ' '+ f['patient']?.value?.lastName}}</h3>
-        @if(medicSelected){<h3>medicSelected.primaryName</h3>}
-        <h3>Consult number: {{'c:' +consultSelected}}</h3>
+      <ng-template matStepLabel>Review</ng-template>
+        <h3>Specialty: {{f!['specialty']?.value?.nameSpecialty}}</h3>
+        <h3>Patient: {{f!['patient']?.value?.firstName + ' ' + f!['patient']?.value?.lastName}}</h3>
+      @if (medicSelected) {
+      <h3>Medic: {{medicSelected.primaryName + ' ' + medicSelected.surName}}</h3>
+      }
+      <h3>Consult Number: {{'C' + consultSelected}}</h3>
 
-      <button mat-raised-button class="fixedLeft" color='primary' type="button" style="float:left;" matStepperPrevious>Prev</button>
+      <button mat-raised-button class="fixedLeft"  type="button" style="float: left;" matStepperPrevious>Previous</button>
+      <button mat-raised-button type="button" color="primary" (click)="save()">Save</button>
     </mat-step>
 
 </mat-horizontal-stepper>
