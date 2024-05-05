@@ -140,7 +140,7 @@ export class ConsultWizardComponent implements OnInit{
     consult.specialty = this.firstFormGroup?.value['specialty'];
     consult.details = this.detail;
     consult.numConsult = `C${this.consultSelected}`;
-    consult.consultDate = format(this.firstFormGroup?.value['consultDate'], "yyyy-MM-dd-'T'HH:mm:ss");
+    consult.consultDate = format(this.firstFormGroup?.value['consultDate'], "yyyy-MM-dd'T'HH:mm:ss");
     const dto : ConsultListExamDTOI = {
       consult: consult,
       listExam: this.examsSelected
