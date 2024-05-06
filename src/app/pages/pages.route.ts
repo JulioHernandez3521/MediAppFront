@@ -7,6 +7,7 @@ import {SpecialtyComponent} from "./specialty/specialty.component";
 import {SpecialtyEditComponent} from "./specialty/Specialty-edit/specialty-edit.component";
 import {ExamEditComponent} from "./exam/edit/exam-edit.component";
 import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component";
+import {SearchComponent} from "./search/search.component";
 
 export const routes: Routes = [
   {
@@ -33,5 +34,8 @@ export const routes: Routes = [
   },
   {
     path: 'consult-wizard' , component:ConsultWizardComponent
+  },
+  {
+    path: 'search' , component:SearchComponent
   }
 ]

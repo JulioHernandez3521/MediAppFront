@@ -1,0 +1,61 @@
+<mat-toolbar>search</mat-toolbar>
+<form [formGroup]="form" (submit)="search()">
+  <mat-tab-group #tabs>
+    <mat-tab label="Option 1">
+      <mat-form-field>
+        <input matInput placeholder="DNI" formControlName="dni">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Patient fullName" formControlName="fullName">
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Opion 2">
+      <mat-form-field>
+        <mat-label>Select a Date Range</mat-label>
+        <mat-date-range-input [rangePicker]="picker" >
+          <input matStartDate placeholder="Start" formControlName="startDate">
+          <input matEndDate placeholder="End" formControlName="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </mat-tab>
+  </mat-tab-group>
+  <button mat-raised-button color="primary" type="submit">Search</button>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <ng-container matColumnDef="patient">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient</th>
+      <td mat-cell *matCellDef="let element"> {{element.patient.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="medic">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Medic </th>
+      <td mat-cell *matCellDef="let element"> {{element.medic.primaryName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="specialty">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Specialty  </th>
+      <td mat-cell *matCellDef="let element"> {{element.specialty.nameSpecialty}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.consultDate | date: 'dd-MM-yyyy hh:mm:ss a'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" (click)="viewDetails(element)">
+          <mat-icon>mode-edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[2,5,10,25]" aria-label="Pagina"></mat-paginator>
+</form>
