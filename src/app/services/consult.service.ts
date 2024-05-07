@@ -28,7 +28,9 @@ export class ConsultService {
     // return this.http.get<Consult[]>(`${this.url}/search/dates`, {params: params});
     return this.http.get<Consult[]>( `${this.url}/search/dates?date1=${d1}&date2=${d2}`);
   }
-  viewDetails(consult:Consult){
 
+  getExamsByIdConsult(idConsult: number){
+    return this.http.get(`${environment.HOST}/api/consultExams/${idConsult}`);
   }
+
 }
