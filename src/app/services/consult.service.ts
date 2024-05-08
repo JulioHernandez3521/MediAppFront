@@ -32,5 +32,8 @@ export class ConsultService {
   getExamsByIdConsult(idConsult: number){
     return this.http.get(`${environment.HOST}/api/consultExams/${idConsult}`);
   }
+  callProcedureOrFunction(){
+    return this.http.get<any>(`${this.url}/callProcedureProjectionNative`);
+  }
 
 }

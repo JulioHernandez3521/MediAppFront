@@ -8,6 +8,7 @@ import {SpecialtyEditComponent} from "./specialty/Specialty-edit/specialty-edit.
 import {ExamEditComponent} from "./exam/edit/exam-edit.component";
 import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component";
 import {SearchComponent} from "./search/search.component";
+import {ReportComponent} from "./report/report.component";
 
 export const routes: Routes = [
   {
@@ -37,5 +38,8 @@ export const routes: Routes = [
   },
   {
     path: 'search' , component:SearchComponent
+  },
+  {
+    path: 'report' , component:ReportComponent
   }
 ]

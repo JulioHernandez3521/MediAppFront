@@ -1,0 +1,11 @@
+<mat-toolbar>Charts, PDF and Images</mat-toolbar>
+
+<button mat-button color="primary" (click)="change('line')">Line</button>
+<button mat-button color="primary" (click)="change('bar')">Bar</button>
+<button mat-button color="primary" (click)="change('doughnut')">Doughnut</button>
+<button mat-button color="primary" (click)="change('radar')">Radar</button>
+<button mat-button color="primary" (click)="change('pie')">Pie</button>
+
+<div [hidden]="!chart" >
+  <canvas id="canvas">{{chart}}</canvas>
+</div>
