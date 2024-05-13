@@ -36,4 +36,24 @@ export class ConsultService {
     return this.http.get<any>(`${this.url}/callProcedureProjectionNative`);
   }
 
+  //pdf
+  generateReport(){
+    return this.http.get(`${this.url}/generateReport`, {responseType: 'blob'});
+  }
+
+  saveFile(data:any){ // patient: Patient
+    const formData: FormData = new FormData();
+    formData.append('file', data);
+    /*
+      const patientBlob = new Blob([JSON.stringify(patient)}, {type: "application/json"});
+      formData.append('patient', patientBlob)'
+    */
+    // return this.http.post(`${this.url}/saveFile`, formData); // ** Cloudinary
+    return this.http.post(`${this.url}/saveFileLocal`, formData);
+  }
+
+  readFile(id:number){
+    return this.http.get(`${this.url}/readFile/${id}`, {responseType: 'blob'});
+  }
+
 }
