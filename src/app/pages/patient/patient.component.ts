@@ -20,6 +20,7 @@ import {ConfirmService} from "../confirm/confirm.service";
 export class PatientComponent implements OnInit{
   dataSource: MatTableDataSource<Patient> = new MatTableDataSource<Patient>();
   displayedColumns: string[] = ['idPatient', 'firstName', 'lastName', 'dni','actions'];
+  total = 0;
 
   columnDefinitions = [
     { def: 'idPatient', label: 'idPatient', hide: true},
@@ -39,10 +40,13 @@ export class PatientComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.patientService.findAll().subscribe((data) => {
-      this.createTable(data);
-    });
-
+    // this.patientService.findAll().subscribe((data) => {
+    //   this.createTable(data);
+    // });
+    this.patientService.listPageable(0,2).subscribe(data => {
+      this.createTable(data.content);
+      this.total =data.totalElements;
+    }, error => {});
     this.patientService.getPatientChange().subscribe((data) => {
       this.createTable(data);
     });
@@ -64,7 +68,7 @@ export class PatientComponent implements OnInit{
 
   createTable(data: Patient[]) {
     this.dataSource = new MatTableDataSource(data);
-    if (this.paginator) this.dataSource.paginator = this.paginator;
+    // if (this.paginator) this.dataSource.paginator = this.paginator;
     if(this.sort) this.dataSource.sort = this.sort;
   }
 
@@ -78,5 +82,12 @@ export class PatientComponent implements OnInit{
   }
   confirm(id:number){
     this.confirmService.openDialog('0ms', '0ms', id);
+  }
+
+  showMore(e:any){
+    this.patientService.listPageable(e.pageIndex, e.pageSize).subscribe(data => {
+      this.total = data.totalElements;
+      this.createTable(data.content);
+    })
   }
 }

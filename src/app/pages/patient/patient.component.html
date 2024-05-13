@@ -40,7 +40,7 @@
   <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
   <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[2,5,10,25]" aria-label="Pagina"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[2,5,10,25]" [length]="total" (page)="showMore($event)" aria-label="Pagina"></mat-paginator>
 
 <button mat-fab color="primary" style="float: right;" routerLink="/pages/patient/new">
   <mat-icon>add</mat-icon>
