@@ -1,3 +1,4 @@
 export const environment = {
-  HOST:"http://localhost:8080"
+  HOST:"http://localhost:8080",
+  RETRY: 2
 };
