@@ -9,6 +9,7 @@ import {ExamEditComponent} from "./exam/edit/exam-edit.component";
 import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component";
 import {SearchComponent} from "./search/search.component";
 import {ReportComponent} from "./report/report.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 export const routes: Routes = [
   {
@@ -41,5 +42,8 @@ export const routes: Routes = [
   },
   {
     path: 'report' , component:ReportComponent
+  },
+  {
+    path: 'dashboard' , component:DashboardComponent
   }
 ]
