@@ -10,6 +10,7 @@ import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component"
 import {SearchComponent} from "./search/search.component";
 import {ReportComponent} from "./report/report.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {Not403Component} from "./not403/not403.component";
 
 export const routes: Routes = [
   {
@@ -45,5 +46,8 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard' , component:DashboardComponent
+  },
+  {
+    path: 'not-403' , component:Not403Component
   }
 ]
