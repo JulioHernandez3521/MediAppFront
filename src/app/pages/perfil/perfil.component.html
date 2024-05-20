@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <mat-toolbar>
+    <mat-icon>account_box</mat-icon>
+    <span>User Info</span>
+  </mat-toolbar>
+  <div class="example-containe">
+    <mat-dialog-content>
+        <p>UserName: {{username}}</p>
+        <p>Roles: {{roles}}</p>
+    </mat-dialog-content>
+  </div>
+  <button mat-raised-button color="accent" (click)="closeDialog()">Close</button>
+
+</mat-dialog-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MaterialModule} from "../../material/material.module";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {LoginService} from "../../services/login.service";
+import {PerfilDialogService} from "../../services/perfil-dialog.service";
 
 @Component({
   selector: 'app-layaot',
@@ -12,11 +13,16 @@ import {LoginService} from "../../services/login.service";
 })
 export class LayaotComponent {
   constructor(
-    private loginService:LoginService
+    private loginService:LoginService,
+    private perfilDialogService: PerfilDialogService
   ) {
   }
 
   logout(){
     this.loginService.logout();
+  }
+
+  openDetails(){
+    this.perfilDialogService.openDialog();
   }
 }
