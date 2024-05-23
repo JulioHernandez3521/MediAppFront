@@ -14,6 +14,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
 import {format} from "date-fns";
 import {MaterialModule} from "../../../material/material.module";
 import {MatTooltip} from "@angular/material/tooltip";
+import {Medic} from "../../../models/medic";
+import {PatientDialogService} from "../../patient/patient-dialog.service";
 
 @Component({
   selector: 'app-sings-edit',
@@ -55,6 +57,7 @@ export class SignsEditComponent implements OnInit{
     private service: SingsService,
     private formService:FormDataService<Sign>,
     private patientService: PatientService,
+    private dialogService:PatientDialogService
   ){}
 
   //private route = inject(ActivatedRoute);
@@ -74,7 +77,10 @@ export class SignsEditComponent implements OnInit{
       this.isEdit = data['id'] != null;
       this.initForm();
     });
-
+    // ** Subcribirse cambios patients
+    this.patientService.getPatientChange().subscribe(data => {
+        this.patients = data;
+    });
     this.loadInitialData();
 
   }
@@ -135,7 +141,7 @@ export class SignsEditComponent implements OnInit{
   showPatient(val:any){
     return val?`${val.firstName}`:val;
   }
-
+  // TODO METERLO EN UN COMPONENTE
   filterPatients(val:any){
     if(val?.idExam >0){
       return this.patients
@@ -146,5 +152,9 @@ export class SignsEditComponent implements OnInit{
         .filter(e => e.firstName?.toLocaleLowerCase().includes(val.toLocaleLowerCase())
           || e.lastName?.toLocaleLowerCase().includes(val.toLocaleLowerCase()));
     }
+  }
+
+  openDialog(){
+    this.dialogService.openDialog();
   }
 }

@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <mat-toolbar>
+    <span>Patient Info</span>
+  </mat-toolbar>
+  <div class="example-containe">
+    <mat-form-field>
+      <input matInput placeholder="Name Name" [(ngModel)]="patient.firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Last name" [(ngModel)]="patient.lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="DNI" [(ngModel)]="patient.dni">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" [(ngModel)]="patient.address">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="patient.email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone" [(ngModel)]="patient.phone">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="save()">Done</button>
+  <button mat-raised-button color="accent" (click)="closeDialog()">Cancel</button>
+
+</mat-dialog-content>
