@@ -1,14 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
-import {MatFormField} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MaterialModule} from "../../../material/material.module";
-import {PatientService} from "../../../services/patient.service";
-import {Patient} from "../../../models/patient";
 import {switchMap} from "rxjs";
 import {SpecialtyService} from "../../../services/specialty.service";
 import {Specialty} from "../../../models/specialty";
