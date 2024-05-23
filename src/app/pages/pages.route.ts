@@ -10,7 +10,8 @@ import {ConsultWizardComponent} from "./consult-wizard/consult-wizard.component"
 import {SearchComponent} from "./search/search.component";
 import {ReportComponent} from "./report/report.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {Not403Component} from "./not403/not403.component";
+import {SignsComponent} from "./signs/signs.component";
+import {SignsEditComponent} from "./signs/signs-edit/signs-edit.component";
 
 export const routes: Routes = [
   {
@@ -18,7 +19,8 @@ export const routes: Routes = [
     children: [
       {path:'new', component:PatientEditComponent},
       {path:'edit/:id', component:PatientEditComponent},
-    ]
+    ],
+    // canActivate:[certGuard]
   },
   {path: "medic", component: MedicComponent},
   {
@@ -26,28 +28,40 @@ export const routes: Routes = [
     children: [
       {path:'new', component:ExamEditComponent},
       {path:'edit/:id', component:ExamEditComponent},
-    ]
+    ],
+    // canActivate:[certGuard]
   },
   {
     path: "specialty", component: SpecialtyComponent,
     children: [
       {path:'new', component:SpecialtyEditComponent},
       {path:'edit/:id', component:SpecialtyEditComponent},
-    ]
+    ],
+    // canActivate:[certGuard]
   },
   {
-    path: 'consult-wizard' , component:ConsultWizardComponent
+    path: 'consult-wizard' , component:ConsultWizardComponent,
+    // canActivate:[certGuard]
   },
   {
-    path: 'search' , component:SearchComponent
+    path: 'search' , component:SearchComponent,
+    // canActivate:[certGuard]
   },
   {
-    path: 'report' , component:ReportComponent
+    path: 'report' , component:ReportComponent,
+    // canActivate:[certGuard]
   },
   {
-    path: 'dashboard' , component:DashboardComponent
+    path: 'dashboard' , component:DashboardComponent,
+    // canActivate:[certGuard]
   },
   {
-    path: 'not-403' , component:Not403Component
+    path: "signs", component: SignsComponent,
+    children: [
+      {path:'new', component:SignsEditComponent},
+      {path:'edit/:id', component:SignsEditComponent},
+    ],
+    // canActivate:[certGuard]
   }
+
 ]

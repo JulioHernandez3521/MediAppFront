@@ -78,6 +78,12 @@
         <span>Report</span>
       </button>
       <mat-divider></mat-divider>
+      <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+              routerLink="/pages/signs" style="cursor: pointer">
+        <mat-icon>assignment_turned_in</mat-icon>
+        <span>Signs</span>
+      </button>
+      <mat-divider></mat-divider>
     </mat-sidenav>
 
     <mat-sidenav-content>
