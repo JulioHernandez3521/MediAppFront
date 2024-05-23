@@ -1,0 +1,62 @@
+@if(form){
+  <form [formGroup]="form" class="example-container" (submit)="operate()" >
+
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" required formControlName="id">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="Patients" formControlName="patient" [matAutocomplete]="autoPatient"
+           [formControl]="patientsControl">
+    <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="showPatient">
+        @for(ex of patientsFiltered$ | async; track $index){
+          <mat-option [value]="ex">
+            {{ex.firstName}}
+          </mat-option>
+        }
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field apperance='fill'>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="date">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    @if(form.controls['date'].errors?.['required'] && form.controls['date'].touched){
+      <small class="invalid">Is required</small>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Temperatura" required formControlName="temperatura">
+    @if(form.controls['temperatura'].errors?.['required'] && form.controls['temperatura'].touched){
+      <small class="invalid">Is required</small>
+    }
+    @if(form.controls['temperatura'].errors?.['maxlength'] && form.controls['temperatura'].touched){
+      <small class="invalid">Max length is 7</small>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Pulso" required formControlName="pulso">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Ritmo" required formControlName="ritmoRespiratorio">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    <mat-icon>done</mat-icon>
+    <span>Done</span>
+  </button>
+
+  <button mat-raised-button color="accent" type="button" routerLink="/pages/signs">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancel</span>
+  </button>
+</form>
+  <button mat-fab color="primary" style="float: right;" [matTooltip]="'Agregar nuevo pasiente'" type="button">
+    <mat-icon>add</mat-icon>
+  </button>
+}
