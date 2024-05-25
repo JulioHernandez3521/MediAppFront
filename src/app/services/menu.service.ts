@@ -11,6 +11,7 @@ import {Menu} from "../models/menu";
 export class MenuService extends BaseService<Menu>{
 
   private menuChange = new Subject<Menu[]>();
+  private messageChange: Subject<string> = new Subject<string>();
 
   constructor(http: HttpClient) {
     super(
@@ -28,5 +29,16 @@ export class MenuService extends BaseService<Menu>{
 
   setMenuChange(menus: Menu[]){
     this.menuChange.next(menus);
+  }
+
+  setMessageChange(data: string){
+    this.messageChange.next(data);
+  }
+
+  getMessageChange(){
+    return this.messageChange.asObservable();
+  }
+  listPageable(p: number, s:number){
+    return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
   }
 }

@@ -12,6 +12,8 @@ import {ReportComponent} from "./report/report.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {SignsComponent} from "./signs/signs.component";
 import {SignsEditComponent} from "./signs/signs-edit/signs-edit.component";
+import {MenuComponent} from "./menu/menu.component";
+import {MenuEditComponent} from "./menu/menu-edit/menu-edit.component";
 
 export const routes: Routes = [
   {
@@ -60,6 +62,14 @@ export const routes: Routes = [
     children: [
       {path:'new', component:SignsEditComponent},
       {path:'edit/:id', component:SignsEditComponent},
+    ],
+    // canActivate:[certGuard]
+  },
+  {
+    path: "menu", component: MenuComponent,
+    children: [
+      {path:'new', component:MenuEditComponent},
+      {path:'edit/:id', component:MenuEditComponent},
     ],
     // canActivate:[certGuard]
   }
