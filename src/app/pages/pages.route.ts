@@ -14,6 +14,8 @@ import {SignsComponent} from "./signs/signs.component";
 import {SignsEditComponent} from "./signs/signs-edit/signs-edit.component";
 import {MenuComponent} from "./menu/menu.component";
 import {MenuEditComponent} from "./menu/menu-edit/menu-edit.component";
+import {RolesComponent} from "./roles/roles.component";
+import {RolesEditComponent} from "./roles/roles-edit/roles-edit.component";
 
 export const routes: Routes = [
   {
@@ -22,7 +24,6 @@ export const routes: Routes = [
       {path:'new', component:PatientEditComponent},
       {path:'edit/:id', component:PatientEditComponent},
     ],
-    // canActivate:[certGuard]
   },
   {path: "medic", component: MedicComponent},
   {
@@ -31,7 +32,6 @@ export const routes: Routes = [
       {path:'new', component:ExamEditComponent},
       {path:'edit/:id', component:ExamEditComponent},
     ],
-    // canActivate:[certGuard]
   },
   {
     path: "specialty", component: SpecialtyComponent,
@@ -39,23 +39,18 @@ export const routes: Routes = [
       {path:'new', component:SpecialtyEditComponent},
       {path:'edit/:id', component:SpecialtyEditComponent},
     ],
-    // canActivate:[certGuard]
   },
   {
     path: 'consult-wizard' , component:ConsultWizardComponent,
-    // canActivate:[certGuard]
   },
   {
     path: 'search' , component:SearchComponent,
-    // canActivate:[certGuard]
   },
   {
     path: 'report' , component:ReportComponent,
-    // canActivate:[certGuard]
   },
   {
     path: 'dashboard' , component:DashboardComponent,
-    // canActivate:[certGuard]
   },
   {
     path: "signs", component: SignsComponent,
@@ -63,7 +58,6 @@ export const routes: Routes = [
       {path:'new', component:SignsEditComponent},
       {path:'edit/:id', component:SignsEditComponent},
     ],
-    // canActivate:[certGuard]
   },
   {
     path: "menu", component: MenuComponent,
@@ -71,7 +65,13 @@ export const routes: Routes = [
       {path:'new', component:MenuEditComponent},
       {path:'edit/:id', component:MenuEditComponent},
     ],
-    // canActivate:[certGuard]
+  },
+  {
+    path: "roles", component: RolesComponent,
+    children: [
+      {path:'new', component:RolesEditComponent},
+      {path:'edit/:id', component:RolesEditComponent},
+    ],
   }
 
 ]
