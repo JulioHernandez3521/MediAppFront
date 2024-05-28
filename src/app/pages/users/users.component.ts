@@ -2,33 +2,34 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
 import {MatTableDataSource} from "@angular/material/table";
+
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmService} from "../confirm/confirm.service";
 import {switchMap} from "rxjs";
-import {RolesService} from "../../services/roles.service";
-import {Rol} from "../../models/rol";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
 
 @Component({
-  selector: 'app-roles',
+  selector: 'app-users',
   standalone: true,
     imports: [
-      MaterialModule,
-      RouterLink,
-      RouterOutlet
+        MaterialModule,
+        RouterLink,
+        RouterOutlet
     ],
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.css'
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.css'
 })
-export class RolesComponent implements OnInit{
-  dataSource: MatTableDataSource<Rol> = new MatTableDataSource<Rol>();
+export class UsersComponent implements OnInit{
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
   total = 0;
 
   columnDefinitions = [
-    { def: 'idRol', label: 'idRol', hide: false},
-    { def: 'name', label: 'name', hide: false},
-    { def: 'description', label: 'description', hide: false},
+    { def: 'idUser', label: 'idUser', hide: false},
+    { def: 'username', label: 'username', hide: false},
+    { def: 'enabled', label: 'enabled', hide: false},
     { def: 'actions', label: 'actions', hide: false}
   ];
 
@@ -36,7 +37,7 @@ export class RolesComponent implements OnInit{
   @ViewChild(MatSort) sort?: MatSort;
 
   constructor(
-    private service: RolesService,
+    private service: UserService,
     private _snackBar: MatSnackBar,
     private confirmService:ConfirmService,
     private route: ActivatedRoute
@@ -48,7 +49,7 @@ export class RolesComponent implements OnInit{
       this.total =data.totalElements;
     }, error => {});
 
-    this.service.getRolChange().subscribe((data) => {
+    this.service.getUserChange().subscribe((data) => {
       this.createTable(data);
     });
 
@@ -63,12 +64,12 @@ export class RolesComponent implements OnInit{
     this.service.delete(idPatient)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {
-        this.service.setRolChange(data);
+        this.service.setUserChange(data);
         this.service.setMessageChange('DELETED!');
       })
   }
 
-  createTable(data: Rol[]) {
+  createTable(data: User[]) {
     this.dataSource = new MatTableDataSource(data);
     if(this.sort) this.dataSource.sort = this.sort;
   }
@@ -94,4 +95,5 @@ export class RolesComponent implements OnInit{
   checkChildren(): boolean{
     return this.route.children.length > 0;
   }
+
 }

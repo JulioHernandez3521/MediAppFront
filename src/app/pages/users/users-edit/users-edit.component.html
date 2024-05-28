@@ -1,0 +1,72 @@
+
+<form [formGroup]="form" class="example-container" (submit)="operate()" *ngIf="form">
+
+  <!--  <div [hidden]="true">-->
+  <mat-form-field>
+    <input matInput placeholder="ID" required formControlName="idUser">
+  </mat-form-field>
+  <!--  </div>-->
+
+  <mat-form-field>
+    <input matInput placeholder="Name" required formControlName="username">
+    @if(form.controls['username'].errors?.['required'] && form.controls['username'].touched){
+      <small class="invalid">Is required</small>
+    }
+    @if(form.controls['username'].errors?.['email'] && form.controls['username'].touched){
+      <small class="invalid">Invalid Format, must be an email</small>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" required formControlName="password">
+    @if(form.controls['password'].errors?.['required'] && form.controls['password'].touched){
+      <small class="invalid">Is required</small>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Enabled</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of options; track option) {
+        <mat-option [value]="option">{{option}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Rol" [matAutocomplete]="autoExam"
+           [formControl]="rolControl">
+    <mat-autocomplete #autoExam="matAutocomplete" [displayWith]="showRol">
+      @for(ex of rolesFiltered$ | async; track $index){
+        <mat-option [value]="ex">
+          {{ex.name}}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button color='primary' type='button' (click)="addRol()" style="width: 400px; margin-bottom: 10px;">add Exam</button>
+  <mat-nav-list>
+    @for (ex of rolesSelected; track $index) {
+      <mat-list-item>
+        {{$index + 1}} {{ex.name}}
+        <button type="button" mat-raised-button color="warn" (click)="removeRol($index)"><mat-icon>restore_from_trash</mat-icon></button>
+      </mat-list-item>
+    }
+  </mat-nav-list>
+
+  <button mat-raised-button color="primary" type="submit">
+    <mat-icon>done</mat-icon>
+    <span>Done</span>
+  </button>
+
+  <button mat-raised-button color="accent" type="button" routerLink="/pages/users">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancel</span>
+  </button>
+</form>

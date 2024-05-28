@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
@@ -26,7 +26,7 @@ import {RolesService} from "../../../services/roles.service";
   templateUrl: './roles-edit.component.html',
   styleUrl: './roles-edit.component.css'
 })
-export class RolesEditComponent {
+export class RolesEditComponent implements OnInit{
   form?: FormGroup;
   id?: number;
   isEdit?: boolean;

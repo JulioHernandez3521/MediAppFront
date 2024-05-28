@@ -16,6 +16,8 @@ import {MenuComponent} from "./menu/menu.component";
 import {MenuEditComponent} from "./menu/menu-edit/menu-edit.component";
 import {RolesComponent} from "./roles/roles.component";
 import {RolesEditComponent} from "./roles/roles-edit/roles-edit.component";
+import {UsersComponent} from "./users/users.component";
+import {UsersEditComponent} from "./users/users-edit/users-edit.component";
 
 export const routes: Routes = [
   {
@@ -69,8 +71,15 @@ export const routes: Routes = [
   {
     path: "roles", component: RolesComponent,
     children: [
-      {path:'new', component:RolesEditComponent},
-      {path:'edit/:id', component:RolesEditComponent},
+      {path: 'new', component: RolesEditComponent},
+      {path: 'edit/:id', component: RolesEditComponent},
+    ],
+  },
+  {
+    path: "users", component: UsersComponent,
+    children: [
+      {path:'new', component:UsersEditComponent},
+      {path:'edit/:id', component:UsersEditComponent},
     ],
   }
 
