@@ -9,7 +9,6 @@ import {UserService} from "../../../services/user.service";
 import {MaterialModule} from "../../../material/material.module";
 import {RolesService} from "../../../services/roles.service";
 import {Rol} from "../../../models/rol";
-import {Exam} from "../../../models/exam";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
