@@ -25,6 +25,27 @@
     <input matInput placeholder="Icon" required formControlName="icon">
   </mat-form-field>
 
+  <mat-form-field>
+    <input matInput placeholder="Rol" [matAutocomplete]="autoRol"
+           [formControl]="rolControl">
+    <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="showRol">
+      @for(ex of rolesFiltered$ | async; track $index){
+        <mat-option [value]="ex">
+          {{ex.name}}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button color='primary' type='button' (click)="addRol()" style="width: 400px; margin-bottom: 10px;">add Rol</button>
+  <mat-nav-list>
+    @for (ex of rolesSelected; track $index) {
+      <mat-list-item>
+        {{$index + 1}} {{ex.name}}
+        <button type="button" mat-raised-button color="warn" (click)="removeRol($index)"><mat-icon>restore_from_trash</mat-icon></button>
+      </mat-list-item>
+    }
+  </mat-nav-list>
+
   <button mat-raised-button color="primary" type="submit">
     <mat-icon>done</mat-icon>
     <span>Done</span>

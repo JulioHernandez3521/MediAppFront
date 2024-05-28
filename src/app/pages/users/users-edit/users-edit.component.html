@@ -40,9 +40,9 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Rol" [matAutocomplete]="autoExam"
+    <input matInput placeholder="Rol" [matAutocomplete]="autoRol"
            [formControl]="rolControl">
-    <mat-autocomplete #autoExam="matAutocomplete" [displayWith]="showRol">
+    <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="showRol">
       @for(ex of rolesFiltered$ | async; track $index){
         <mat-option [value]="ex">
           {{ex.name}}
