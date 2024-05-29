@@ -18,6 +18,9 @@ import {RolesComponent} from "./roles/roles.component";
 import {RolesEditComponent} from "./roles/roles-edit/roles-edit.component";
 import {UsersComponent} from "./users/users.component";
 import {UsersEditComponent} from "./users/users-edit/users-edit.component";
+import {certGuard} from "../guard/cer.guard";
+import {Not403Component} from "./not403/not403.component";
+import {Not404Component} from "./not404/not404.component";
 
 export const routes: Routes = [
   {
@@ -26,14 +29,17 @@ export const routes: Routes = [
       {path:'new', component:PatientEditComponent},
       {path:'edit/:id', component:PatientEditComponent},
     ],
+    canActivate:[certGuard]
   },
-  {path: "medic", component: MedicComponent},
+  {path: "medic", component: MedicComponent,
+  canActivate:[certGuard]},
   {
     path: "exam", component: ExamComponent,
     children: [
       {path:'new', component:ExamEditComponent},
       {path:'edit/:id', component:ExamEditComponent},
     ],
+    canActivate:[certGuard]
   },
   {
     path: "specialty", component: SpecialtyComponent,
@@ -41,18 +47,23 @@ export const routes: Routes = [
       {path:'new', component:SpecialtyEditComponent},
       {path:'edit/:id', component:SpecialtyEditComponent},
     ],
+    canActivate:[certGuard]
   },
   {
     path: 'consult-wizard' , component:ConsultWizardComponent,
+    canActivate:[certGuard]
   },
   {
     path: 'search' , component:SearchComponent,
+    canActivate:[certGuard]
   },
   {
     path: 'report' , component:ReportComponent,
+    canActivate:[certGuard]
   },
   {
     path: 'dashboard' , component:DashboardComponent,
+    canActivate:[certGuard]
   },
   {
     path: "signs", component: SignsComponent,
@@ -60,6 +71,7 @@ export const routes: Routes = [
       {path:'new', component:SignsEditComponent},
       {path:'edit/:id', component:SignsEditComponent},
     ],
+    canActivate:[certGuard]
   },
   {
     path: "menu", component: MenuComponent,
@@ -67,6 +79,7 @@ export const routes: Routes = [
       {path:'new', component:MenuEditComponent},
       {path:'edit/:id', component:MenuEditComponent},
     ],
+    canActivate:[certGuard]
   },
   {
     path: "roles", component: RolesComponent,
@@ -74,6 +87,7 @@ export const routes: Routes = [
       {path: 'new', component: RolesEditComponent},
       {path: 'edit/:id', component: RolesEditComponent},
     ],
+    canActivate:[certGuard]
   },
   {
     path: "users", component: UsersComponent,
@@ -81,6 +95,11 @@ export const routes: Routes = [
       {path:'new', component:UsersEditComponent},
       {path:'edit/:id', component:UsersEditComponent},
     ],
-  }
-
+    canActivate:[certGuard]
+  },
+  {
+    path: 'not-403' , component:Not403Component
+  },
+  {path:'not-404', component:Not404Component},
+  {path:'**', redirectTo:'not-404'}
 ]
