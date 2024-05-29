@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {environment} from "../../../environments/environment.development";
 import {MatIcon} from "@angular/material/icon";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-perfil',
@@ -33,6 +34,7 @@ export class PerfilComponent implements OnInit{
 
   constructor(
       private _dialogRef: MatDialogRef<PerfilComponent>,
+      private userService:UserService
   )
   {}
 
@@ -42,7 +44,12 @@ export class PerfilComponent implements OnInit{
     // console.warn(token)
     const tokenDecoded = helper.decodeToken(token);
     this.username = tokenDecoded.sub;
-    this.roles = tokenDecoded.role;
+    if (!this.username) return;
+    this.userService.findByName(this.username).subscribe(data => {
+        if(data){
+          this.roles = data.roles?.map(rol => rol.name).join(", ");
+        }
+    })
     // console.warn(tokenDecoded);
   }
 

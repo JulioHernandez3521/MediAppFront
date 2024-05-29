@@ -36,4 +36,7 @@ export class UserService extends BaseService<User>{
   listPageable(p: number, s:number){
     return this.http.get<any>(`${this.url}/pageable?page=${p}&size=${s}`);
   }
+  findByName(name:string){
+    return this.http.get<User>(`${this.url}/findByName/${name}`)
+  }
 }
