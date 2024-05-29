@@ -65,7 +65,6 @@ export class SignsEditComponent implements OnInit{
   ngOnInit(): void {
     this.form = new FormGroup({
       id: new FormControl(0),
-      patient: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       temperatura: new FormControl('',[Validators.required, Validators.maxLength(7)]),
       pulso: new FormControl(''),
@@ -82,10 +81,10 @@ export class SignsEditComponent implements OnInit{
         this.patients = data;
     });
     this.loadInitialData();
+    this.patientsFiltered$ = this.patientsControl.valueChanges.pipe(map(val => this.filterPatients(val)));
 
   }
   loadInitialData(){
-    this.patientsFiltered$ = this.patientsControl.valueChanges.pipe(map(val => this.filterPatients(val)));
     this.patientService.findAll().subscribe(data => this.patients = data);
   }
   initForm(){
@@ -98,7 +97,6 @@ export class SignsEditComponent implements OnInit{
 
         this.form = new FormGroup({
           id: new FormControl(data.id),
-          patient: new FormControl(data.patient),
           date: new FormControl(data.date),
           temperatura: new FormControl(data.temperatura),
           pulso: new FormControl(data.pulso),

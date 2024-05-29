@@ -8,8 +8,8 @@
   </div>
 
   <mat-form-field>
-    <input matInput placeholder="Patients" formControlName="patient" [matAutocomplete]="autoPatient"
-           [formControl]="patientsControl">
+    <input matInput placeholder="Patients" [matAutocomplete]="autoPatient"
+           [formControl]="patientsControl" readonly="{{isEdit}}">
     <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="showPatient">
         @for(ex of patientsFiltered$ | async; track $index){
           <mat-option [value]="ex">
