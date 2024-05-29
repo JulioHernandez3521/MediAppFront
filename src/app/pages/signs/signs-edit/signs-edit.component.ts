@@ -143,7 +143,7 @@ export class SignsEditComponent implements OnInit{
   }
   // TODO METERLO EN UN COMPONENTE
   filterPatients(val:any){
-    if(val?.idExam >0){
+    if(val?.id >0){
       return this.patients
         .filter(e => e.firstName?.toLocaleLowerCase().includes(val.firstName.toLocaleLowerCase())
           || e.lastName?.toLocaleLowerCase().includes(val.lastName.toLocaleLowerCase()));
