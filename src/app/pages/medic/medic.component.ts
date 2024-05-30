@@ -51,7 +51,6 @@ export class MedicComponent implements OnInit{
     // Onjectos Subjects
     this.service.getMedicChange().subscribe(data => this.createTable(data));
     this.service.getMessageChange().subscribe(data => this._snackBar.open(data,"INFO",{duration:2000} ));
-    this.confirmService.getConfirm().subscribe(data => this.delete(data));
 
   }
   createTable(data: Medic[]) {
@@ -79,6 +78,11 @@ export class MedicComponent implements OnInit{
       })
   }
   confirm(id:number){
-    this.confirmService.openDialog('0ms', '0ms', id);
+    this.confirmService.openDialog('0ms', '0ms', id)
+      .afterClosed()
+      .subscribe(data => {
+        console.warn(data)
+        if(data) this.delete(id);
+      });
   }
 }

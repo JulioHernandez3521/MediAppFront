@@ -55,8 +55,6 @@ export class RolesComponent implements OnInit{
     this.service.getMessageChange().subscribe(data => {
       this._snackBar.open(data, 'INFO', {duration: 2000, verticalPosition: 'top', horizontalPosition: 'right'});
     });
-    // ** Confirm delete
-    this.confirmService.getConfirm().subscribe(data => this.delete(data));
   }
 
   delete(idPatient: number){
@@ -83,7 +81,12 @@ export class RolesComponent implements OnInit{
     //this.dataSource.filterPredicate = () => { };
   }
   confirm(id:number){
-    this.confirmService.openDialog('0ms', '0ms', id);
+    this.confirmService.openDialog('0ms', '0ms', id)
+      .afterClosed()
+      .subscribe(data => {
+        console.warn(data)
+        if(data) this.delete(id);
+      });
   }
 
   showMore(e:any){

@@ -8,25 +8,16 @@ import {Subject} from "rxjs";
 })
 export class ConfirmService {
 
-
-  private confirm: Subject<any> = new Subject<any>();
+  delete = false;
   constructor(private dialog: MatDialog) { }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, id:any): void {
-    this.dialog.open(ConfirmComponent, {
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, id:any) {
+    return this.dialog.open(ConfirmComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: id
     });
-  }
-
-  setConfirm(data?: any){
-    this.confirm.next(data);
-  }
-
-  getConfirm(){
-    return this.confirm.asObservable();
   }
 
 }

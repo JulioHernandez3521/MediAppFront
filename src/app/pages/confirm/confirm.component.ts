@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ConfirmService} from "./confirm.service";
-import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
@@ -13,14 +12,17 @@ import {MatButtonModule} from "@angular/material/button";
 export class ConfirmComponent implements OnInit{
   id?:any;
   constructor(
-    private service:ConfirmService,
+    public dialogo: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) private data:any,
   ) {}
 
   ngOnInit(): void {
     this.id = this.data;
   }
-  setValue(data?:any){
-    this.service.setConfirm(data);
+  setValueNo(){
+    this.dialogo.close(false);
+  }
+  setValueOk(){
+    this.dialogo.close(true);
   }
 }

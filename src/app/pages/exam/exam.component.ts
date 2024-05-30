@@ -54,7 +54,6 @@ export class ExamComponent implements OnInit{
     this.service.getMessageChange().subscribe(data => {
       this._snackBar.open(data, 'INFO', {duration: 2000, verticalPosition: 'top', horizontalPosition: 'right'});
     });
-    this.confirmService.getConfirm().subscribe(data => this.delete(data));
   }
 
   delete(idExam: number){
@@ -81,7 +80,12 @@ export class ExamComponent implements OnInit{
     this.dataSource.filter = e.target.value.trim();
   }
   confirm(id:number){
-    this.confirmService.openDialog('0ms', '0ms', id);
+    this.confirmService.openDialog('0ms', '0ms', id)
+      .afterClosed()
+      .subscribe(data => {
+        console.warn(data)
+        if(data) this.delete(id);
+      });
   }
   checkChildren(): boolean{
     return this.route.children.length > 0;
