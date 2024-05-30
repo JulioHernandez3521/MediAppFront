@@ -4,8 +4,6 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
-import {Patient} from "../../models/patient";
-import {PatientService} from "../../services/patient.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmService} from "../confirm/confirm.service";
 import {switchMap} from "rxjs";
@@ -63,6 +61,7 @@ export class MenuComponent  implements  OnInit{
   }
 
   delete(idPatient: number){
+    if(!idPatient)return;
     this.service.delete(idPatient)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {

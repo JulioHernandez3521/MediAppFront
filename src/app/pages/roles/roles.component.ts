@@ -60,6 +60,7 @@ export class RolesComponent implements OnInit{
   }
 
   delete(idPatient: number){
+    if(!idPatient)return;
     this.service.delete(idPatient)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {

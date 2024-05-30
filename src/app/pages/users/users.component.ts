@@ -60,8 +60,9 @@ export class UsersComponent implements OnInit{
     this.confirmService.getConfirm().subscribe(data => this.delete(data));
   }
 
-  delete(idPatient: number){
-    this.service.delete(idPatient)
+  delete(id: number){
+    if(!id)return;
+    this.service.delete(id)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {
         this.service.setUserChange(data);

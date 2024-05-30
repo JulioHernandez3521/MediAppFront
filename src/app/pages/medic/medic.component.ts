@@ -1,23 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatButton, MatFabButton} from "@angular/material/button";
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable, MatTableDataSource
-} from "@angular/material/table";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
+import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {MatSort} from "@angular/material/sort";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
 import {Medic} from "../../models/medic";
-import {Patient} from "../../models/patient";
 import {MedicService} from "../../services/medic.service";
 import {MedicDialogService} from "./medic-dialog.service";
 import {MatSnackBar} from "@angular/material/snack-bar";

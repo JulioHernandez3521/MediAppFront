@@ -63,6 +63,7 @@ export class SignsComponent implements OnInit{
   }
 
   delete(idSign: number){
+    if(!idSign) return;
     this.patientService.delete(idSign)
       .pipe(switchMap( ()=> this.patientService.findAll() ))
       .subscribe(data => {

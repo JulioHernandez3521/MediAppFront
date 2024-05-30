@@ -58,6 +58,7 @@ export class SpecialtyComponent implements OnInit{
   }
 
   delete(idSpecialty: number){
+    if(!idSpecialty)return;
     this.service.delete(idSpecialty)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {

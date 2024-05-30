@@ -58,6 +58,7 @@ export class ExamComponent implements OnInit{
   }
 
   delete(idExam: number){
+    if(!idExam)return;
     this.service.delete(idExam)
       .pipe(switchMap( ()=> this.service.findAll() ))
       .subscribe(data => {

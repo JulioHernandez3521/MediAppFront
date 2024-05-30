@@ -58,6 +58,7 @@ export class PatientComponent implements OnInit{
   }
 
   delete(idPatient: number){
+    if(!idPatient) return;
     this.patientService.delete(idPatient)
       .pipe(switchMap( ()=> this.patientService.findAll() ))
       .subscribe(data => {
