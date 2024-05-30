@@ -100,6 +100,4 @@ export const routes: Routes = [
   {
     path: 'not-403' , component:Not403Component
   },
-  {path:'not-404', component:Not404Component},
-  {path:'**', redirectTo:'not-404'}
 ]
