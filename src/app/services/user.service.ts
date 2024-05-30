@@ -9,7 +9,7 @@ import {User} from "../models/user";
   providedIn: 'root'
 })
 export class UserService extends BaseService<User>{
-  private menuChange = new Subject<User[]>();
+  private userChange = new Subject<User[]>();
   private messageChange: Subject<string> = new Subject<string>();
 
   constructor(http: HttpClient) {
@@ -19,11 +19,11 @@ export class UserService extends BaseService<User>{
   }
 
   getUserChange(){
-    return this.menuChange.asObservable();
+    return this.userChange.asObservable();
   }
 
   setUserChange(menus: User[]){
-    this.menuChange.next(menus);
+    this.userChange.next(menus);
   }
 
   setMessageChange(data: string){
