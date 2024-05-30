@@ -9,7 +9,7 @@ import {environment} from "../../environments/environment.development";
   providedIn: 'root'
 })
 export class SingsService extends BaseService<Sign>{
-  private patientChange: Subject<Sign[]> = new Subject<Sign[]>();
+  private singsChange: Subject<Sign[]> = new Subject<Sign[]>();
   private messageChange: Subject<string> = new Subject<string>();
 
   constructor(protected override http: HttpClient){
@@ -17,11 +17,11 @@ export class SingsService extends BaseService<Sign>{
   }
 
   setSignChange(data: Sign[]){
-    this.patientChange.next(data);
+    this.singsChange.next(data);
   }
 
   getSignChange(){
-    return this.patientChange.asObservable();
+    return this.singsChange.asObservable();
   }
 
   setMessageChange(data: string){
