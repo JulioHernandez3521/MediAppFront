@@ -9,7 +9,7 @@ import {Rol} from "../models/rol";
   providedIn: 'root'
 })
 export class RolesService  extends BaseService<Rol>{
-  private menuChange = new Subject<Rol[]>();
+  private rolesChange = new Subject<Rol[]>();
   private messageChange: Subject<string> = new Subject<string>();
 
   constructor(http: HttpClient) {
@@ -19,11 +19,11 @@ export class RolesService  extends BaseService<Rol>{
   }
 
   getRolChange(){
-    return this.menuChange.asObservable();
+    return this.rolesChange.asObservable();
   }
 
   setRolChange(menus: Rol[]){
-    this.menuChange.next(menus);
+    this.rolesChange.next(menus);
   }
 
   setMessageChange(data: string){
