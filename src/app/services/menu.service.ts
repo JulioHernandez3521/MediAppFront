@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.development';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {BaseService} from "./base.service";
 import {Menu} from "../models/menu";
 
@@ -10,7 +10,7 @@ import {Menu} from "../models/menu";
 })
 export class MenuService extends BaseService<Menu>{
 
-  private menuChange = new Subject<Menu[]>();
+  private menuChange = new BehaviorSubject<Menu[]>([]);
   private messageChange: Subject<string> = new Subject<string>();
 
   constructor(http: HttpClient) {
