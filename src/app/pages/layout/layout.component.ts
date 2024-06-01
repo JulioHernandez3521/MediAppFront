@@ -7,13 +7,13 @@ import {MenuService} from "../../services/menu.service";
 import {Menu} from "../../models/menu";
 
 @Component({
-  selector: 'app-layaot',
+  selector: 'app-layout',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, MaterialModule],
-  templateUrl: './layaot.component.html',
-  styleUrl: './layaot.component.css'
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.css'
 })
-export class LayaotComponent  implements  OnInit{
+export class LayoutComponent implements  OnInit{
 
   menuOptions :Menu[] = [];
 
