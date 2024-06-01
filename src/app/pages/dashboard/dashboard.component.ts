@@ -24,6 +24,6 @@ export class DashboardComponent implements OnInit{
       this.username = tokenDecoded.sub;
       if(!this.username) return;
       // console.warn(tokenDecoded);
-      this.menuService.getMenusByUser(this.username).subscribe({next: value => { this.menuService.setMenuChange(value) },error: err =>{ console.error(err)}, complete: () => console.warn('end') })
+      // this.menuService.getMenusByUser(this.username).subscribe({next: value => { this.menuService.setMenuChange(value) },error: err =>{ console.error(err)}, complete: () => console.warn('end') })
   }
 }
